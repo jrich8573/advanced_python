@@ -8,3 +8,11 @@
 # Descriptor having binding behavior. Meaning, and engineer and define behavior and bind that behavior to a given properity
 # Can be defined as two types: data (read and write) and non-data (read) 
 # Are defined to a class not an instance of the class
+# important terminologies 
+# self:instance of the decriptor that is created
+# object: object the descriptor is attached to
+# type: type of the object the descriptor is attached to 
+# get: access the attribute returns the value of the attribute. Can raise the attribute error exception if the attribute isn't available
+# set: sets a value of the attribute. It doesn't return anything. Can raise the attribute error exception
+# delete:delete operation on an attribute
+# value: the value of the attribute
