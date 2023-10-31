@@ -1,5 +1,5 @@
 # a dictionary comprehension is a method of transforming one dictionary into another dictionary
-'''
+
 dict = {'a':1, 'b':2, 'c':3,'d':4}
 
 x = dict.keys()
@@ -44,7 +44,7 @@ print(dict1)
 dict2 = {i:i **2 for i in range(10) if i%2==0}
 print(dict2)
 #{0: 0, 2: 4, 4: 16, 6: 36, 8: 64}
-'''
+
 # lambda function
 feh = {'temp1':10, 'temp2':20, 'temp3':30, 'temp4': 40}
 
