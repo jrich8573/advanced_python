@@ -18,6 +18,8 @@
 # delete:delete operation on an attribute
 # value: the value of the attribute
 
+# I would more than likely write the getters and setters directly into my class. 
+# However, this code is just practice and not meant for production use.  
 class Descriptors: 
     def __init__(self):
         self.__bmi = 0
@@ -79,5 +81,5 @@ James age is 25 with bmi of 48
 
 We see this behavior because the descriptor is associated with the class and not the instance.
 Therefore, given that we passed a new bmi parameter to the class, in the person2 variable, 
-we have simply overwritten our previously pass bmi parameter. 
+we have simply overwritten our previously passed bmi parameter. 
 '''
