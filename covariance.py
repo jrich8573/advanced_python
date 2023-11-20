@@ -19,13 +19,13 @@ housing = pd.DataFrame({'house_price':[2, 4, 6, 12], 'houses_sold':[1000, 800, 6
 
 
 
-def purmetation(x, y) -> int:
+def purmetation(x, y):
     tickets_choice = math.factorial(x)/(math.factorial(y) * math.factorial(x-y))
     return tickets_choice
 
 
 
-def choice(x,y) -> int:
+def choice(x,y):
     p =  math.factorial(x)/math.factorial(x-y)
     return p
 
