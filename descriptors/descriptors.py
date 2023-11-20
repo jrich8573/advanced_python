@@ -83,3 +83,137 @@ We see this behavior because the descriptor is associated with the class and not
 Therefore, given that we passed a new bmi parameter to the class, in the person2 variable, 
 we have simply overwritten our previously passed bmi parameter. 
 '''
+
+class Person:
+    def __init__(self,name):
+        self._name = name
+    
+    def getName(self):
+        print("Getting the name") 
+        return self._name
+    
+    def setName(self, name):
+        print("Setting the name: " + name)
+        self._name = name
+
+    def delName(self):
+        print("Deleting the name" + "\n")
+        del self._name
+        
+    name = property(getName, setName, delName)
+    
+name = Person("John")
+print(name.name) # syntax is variable.property
+
+name.name = "Price"
+
+del name.name
+#print(name.name)
+
+# creating descriptors using classes
+class descriptors:
+    def __init__(self, x = ""):
+        self.x = x
+        
+    def __get__(self, obj, objtype):
+        return "{} for {}".format(self.x, self.x)
+
+    def __set__(self, obj, x):
+        if isinstance(x, str):
+            self.x = x
+        else:
+            raise TypeError("X should be of type string")
+class A(object):
+    x = descriptors()
+
+y = A()
+y.x = "John"
+#y.x = 12 #throws a type error
+print(y.x + "\n")
+
+# Creating descriptors using the @ property
+# syntax: @property -> getter, @x.setter -> setter, @x.deleter -> delete
+
+class NewPerson:
+    def __init__(self, name):
+        self._name = name
+   
+    @property
+    def name(self):
+        print("Getting the name") 
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        print("Setting the name to: " + name)
+        self._name = name
+    
+    @name.deleter
+    def name(self):
+        print("Deleting the name" + "\n")
+        del self._name
+  
+x = NewPerson("John") 
+print(x.name)
+x.name  = "Price"
+del x.name
+
+# lazy properties: These are properties whose initial values are not load until they are accessed, 
+# then the values are cached for later use
+import random
+import time
+
+class Lazy:
+    def __init__(self, function):
+        self.function = function
+        self.name = function.__name__
+        
+    def __get__(self, obj, type = None) -> object:
+        obj.__dict__[self.name] = self.function(obj)
+        return obj.__dict__[self.name]
+    
+    def __set__(self, obj, value): # causing the lazy property to stop working
+        pass
+        
+
+class Waiting:
+    @Lazy
+    def wait(self):
+        time.sleep(3)
+        
+        return 42 # cached values
+    
+x = Waiting()
+# print(x.wait)
+# print(x.wait)
+# print(x.wait)
+
+class EvenNumbers:
+    def __set_value_(self, owner, value):
+        self.value = value
+    
+    def __get__(self, obj, type = None) -> object:
+        return obj.__dict__.get(self.value) or 0
+    
+    def __set__(self, obj, value) -> None:
+        obj.__dict__[self.value] = value if value % 2 == 0 else 0
+        
+    
+
+class Values:
+    def __init(self):
+        self.value1 = EvenNumbers()
+        self.value2 = EvenNumbers()
+        self.value3 = EvenNumbers()
+            
+
+
+
+        
+
+my_values = Values()
+my_values.value1 = 1 # should return a 0
+my_values.value2 = 4
+print(my_values.value1)
+print(my_values.value2)
+
