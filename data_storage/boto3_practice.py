@@ -40,3 +40,10 @@ def create_temp_file(size, file_name, file_context):
         f.write(str(file_context) * size)
     return random_file_name
 
+# copy file between buckets
+def copy_to_bucket(s3_connection, from_bucket, to_bucket, file_name):
+    copy_source = {
+        'Bucket': from_bucket,
+        'Key': file_name
+    }
+    s3_connection.Object(to_bucket, file_name).copy(copy_source)
